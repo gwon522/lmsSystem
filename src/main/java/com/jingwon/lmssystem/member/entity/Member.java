@@ -18,6 +18,8 @@ public class Member {
 
     private String userName;
     private String pwd;
+    private String resetPwdKey;
+    private LocalDateTime resetPwdLimitDt;
     private String phone;
 
     private LocalDateTime regDt;

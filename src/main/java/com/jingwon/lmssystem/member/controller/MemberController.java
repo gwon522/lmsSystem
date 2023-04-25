@@ -1,7 +1,9 @@
 package com.jingwon.lmssystem.member.controller;
 
 import com.jingwon.lmssystem.member.model.MemberInput;
+import com.jingwon.lmssystem.member.model.ResetPwd;
 import com.jingwon.lmssystem.member.service.MemberService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -45,9 +47,58 @@ public class MemberController {
         return "member/email_auth";
     }
 
-    @GetMapping("/login")
+    @RequestMapping("/login")
     public String login(){
 
         return "/member/login";
+    }
+
+    @GetMapping("/info")
+    public String myPage(){
+
+        return "/member/info";
+    }
+
+    @GetMapping("/find-pwd")
+    public String findPwd(){
+
+        return "/member/find_pwd";
+    }
+    @PostMapping("/find-pwd")
+    public String findPwdSubmit(Model model, ResetPwd param){
+        boolean result = false;
+        try {
+            result = memberService.sendResetPwd(param);
+        }catch (Exception e){
+
+        }
+        model.addAttribute("result", result);
+        return "/member/find_pwd_result";
+    }
+    @GetMapping("/reset-pwd")
+    public String resetPwd(Model model, ResetPwd param){
+
+        String uuid = param.getId();
+        boolean result = false;
+        try{
+            result = memberService.checkResetPwd(uuid);
+        }catch (Exception e){
+
+        }
+        model.addAttribute("result",result);
+        return "/member/reset_pwd";
+    }
+    @PostMapping("/reset-pwd")
+    public String resetPwdSubmit(Model model, ResetPwd param){
+
+        boolean result = false;
+        try {
+            result =memberService.resetPwd(param.getId(),param.getPassword());
+        }catch (Exception e){
+
+        }
+        model.addAttribute("result",result);
+
+        return "/member/reset_pwd_result";
     }
 }

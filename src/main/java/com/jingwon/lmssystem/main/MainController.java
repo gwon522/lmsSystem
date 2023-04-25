@@ -1,4 +1,4 @@
-package com.jingwon.lmssystem;
+package com.jingwon.lmssystem.main;
 
 import com.jingwon.lmssystem.component.MailComponents;
 import lombok.RequiredArgsConstructor;

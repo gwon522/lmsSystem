@@ -1,5 +1,6 @@
-package com.jingwon.lmssystem;
+package com.jingwon.lmssystem.config;
 
+import com.jingwon.lmssystem.LmsSystemApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

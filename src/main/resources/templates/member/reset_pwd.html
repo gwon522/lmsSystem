@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 찾기</title>
+</head>
+
+<body>
+    <h1>비밀번호 찾기</h1>
+    <div th:if="${result eq true}">
+        <form method="post" id="reset">
+            <div>
+                <input name="password" id="pwd" type="password" placeholder="비밀번호 입력" required>
+            </div>
+            <div>
+                <input name="rePassword" id="rePwd" type="password" placeholder="확인 비밀번호" required>
+            </div>
+            <div>
+                <button type="submit" onclick="DataCheck();">변경</button>
+    <!--            <input type="button" onsubmit="DataCheck();" value="변경" />-->
+            </div>
+        </form>
+    </div>
+    <div th:if="${result eq false}">
+        <p>입력값이 유효하지 않습니다.</p>
+    </div>
+</body>
+<script>
+    const pwd = document.getElementById('pwd');
+    const chk_pwd = document.getElementById('rePwd');
+
+    document.querySelector('form').addEventListener("submit", (event) => {
+        if (pwd.value != chk_pwd.value) {
+            alert('비밀번호가 일치하지 않습니다');
+            event.preventDefault();
+        }
+    })
+</script>
+</html>
