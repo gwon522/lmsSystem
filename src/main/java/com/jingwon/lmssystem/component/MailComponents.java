@@ -14,17 +14,8 @@ import javax.mail.internet.MimeMessage;
 @RequiredArgsConstructor
 @Slf4j
 public class MailComponents {
-    //xktzawjmmtpaxfme
 
     private final JavaMailSender javaMailSender;
-
-    public void sendMailTest(){
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("nesaz0522@naver.com");
-        msg.setSubject("ㅎㅇ 테스트용 메일");
-        msg.setText("텍스트 내용 테스트");
-        javaMailSender.send(msg);
-    }
 
     public boolean sendMail(String mail, String subject, String text){
         boolean result = false;

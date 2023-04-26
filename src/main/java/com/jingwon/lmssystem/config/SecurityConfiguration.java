@@ -51,7 +51,11 @@ public class SecurityConfiguration{
                         ,"/member/find-pwd"
                         ,"/member/reset-pwd"
                         ,"/member/reset-pwd-result")
-                .permitAll().anyRequest().authenticated();
+                .permitAll()
+                .antMatchers("/admin/**")
+                .hasRole("ADMIN")
+                .anyRequest().authenticated();
+
 
         http.formLogin()
                 .loginPage("/member/login")
@@ -61,6 +65,9 @@ public class SecurityConfiguration{
         http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
+
+        http.exceptionHandling()
+                .accessDeniedPage("/error/denied");
 
         return http.build();
     }

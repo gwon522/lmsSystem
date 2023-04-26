@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
         mailComponents.sendMail(member.getUserId()
                 ,"사이트가입을 위한 인증"
                 ,"<p>사이트 가입을 축하드립니다.</p><p>아래 링크를 클릭하셔서 가입을 완료하세요.</p>"
-                +"<div><a target='blank_' href='http://localhost:8080/member/email-auth?id="+uuid+"'>사이트 이동</a></div>");
+                +"<div><a target='blank_' href='http://localhost:8080/member/hemail-aut?id="+uuid+"'>사이트 이동</a></div>");
 
 
         memberRepository.save(member);
@@ -64,7 +64,13 @@ public class MemberServiceImpl implements MemberService {
             return false;
         }
 
+
         Member member = optionalMember.get();
+
+        if(member.isEmailAuthYn()){
+            return false;
+        }
+
         member.setEmailAuthYn(true);
         member.setEmailAuthDt(LocalDateTime.now());
 
@@ -130,7 +136,11 @@ public class MemberServiceImpl implements MemberService {
         if(!member.isEmailAuthYn()){
             throw new MemberNotEmailAuthException("이메일 활성화가 되지 않았습니다.");
         }
+        String role = "USER";
+        if(member.isAdminYn()){
+            role = "ADMIN";
+        }
 
-        return User.builder().username(member.getUserId()).password(member.getPwd()).roles("USER").build();
+        return User.builder().username(member.getUserId()).password(member.getPwd()).roles(role).build();
     }
 }

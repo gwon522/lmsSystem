@@ -28,4 +28,6 @@ public class Member {
     private LocalDateTime emailAuthDt;
     private String emailAuthKey;
 
+    private boolean adminYn;
+
 }
