@@ -1,4 +1,4 @@
-package com.jingwon.lmssystem.member.model;
+package com.jingwon.lmssystem.domain.member.model;
 
 import lombok.Data;
 

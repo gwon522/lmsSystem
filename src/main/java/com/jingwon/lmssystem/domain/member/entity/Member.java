@@ -1,4 +1,4 @@
-package com.jingwon.lmssystem.member.entity;
+package com.jingwon.lmssystem.domain.member.entity;
 
 import lombok.*;
 

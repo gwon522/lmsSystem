@@ -1,9 +1,8 @@
-package com.jingwon.lmssystem.member.controller;
+package com.jingwon.lmssystem.domain.member.controller;
 
-import com.jingwon.lmssystem.member.model.MemberInput;
-import com.jingwon.lmssystem.member.model.ResetPwd;
-import com.jingwon.lmssystem.member.service.MemberService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.jingwon.lmssystem.domain.member.service.MemberService;
+import com.jingwon.lmssystem.domain.member.model.MemberInput;
+import com.jingwon.lmssystem.domain.member.model.ResetPwd;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

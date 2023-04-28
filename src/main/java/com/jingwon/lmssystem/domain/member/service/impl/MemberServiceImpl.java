@@ -1,12 +1,13 @@
-package com.jingwon.lmssystem.member.service.impl;
+package com.jingwon.lmssystem.domain.member.service.impl;
 
+import com.jingwon.lmssystem.common.dto.SearchDto;
 import com.jingwon.lmssystem.component.MailComponents;
-import com.jingwon.lmssystem.member.entity.Member;
-import com.jingwon.lmssystem.member.excetion.MemberNotEmailAuthException;
-import com.jingwon.lmssystem.member.model.MemberInput;
-import com.jingwon.lmssystem.member.model.ResetPwd;
-import com.jingwon.lmssystem.member.repository.MemberRepository;
-import com.jingwon.lmssystem.member.service.MemberService;
+import com.jingwon.lmssystem.domain.member.entity.Member;
+import com.jingwon.lmssystem.domain.member.excetion.MemberNotEmailAuthException;
+import com.jingwon.lmssystem.domain.member.repository.MemberRepository;
+import com.jingwon.lmssystem.domain.member.service.MemberService;
+import com.jingwon.lmssystem.domain.member.model.MemberInput;
+import com.jingwon.lmssystem.domain.member.model.ResetPwd;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
@@ -15,7 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -126,6 +129,23 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return true;
+    }
+
+    @Override
+    public List<Member> list(SearchDto searchDto) {
+        log.info(searchDto.getSearchType() );
+        if(searchDto.getSearchType() == null){
+            return memberRepository.findAll();
+        }
+        String searchValue =searchDto.getSearchValue();
+        switch (searchDto.getSearchType()){
+            case "phone":
+                return memberRepository.findByPhoneContaining(searchValue);
+            case "name":
+                return memberRepository.findByUserNameContaining(searchValue);
+            default:
+                return memberRepository.searchByUserNameOrPhone(searchValue);
+        }
     }
 
     @Override

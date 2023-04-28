@@ -1,4 +1,4 @@
-package com.jingwon.lmssystem.admin.controller;
+package com.jingwon.lmssystem.domain.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
