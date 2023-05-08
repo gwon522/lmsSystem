@@ -34,6 +34,8 @@ public class SecurityConfiguration{
 
         http.authorizeRequests()
                 .antMatchers("/"
+                        ,"/css/*"
+                        ,"/js/*"
                         ,"/member/email-auth"
                         ,"/member/register"
                         ,"/member/find-pwd"

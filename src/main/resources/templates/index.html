@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>메인 페이지</title>
-</head>
-<body>
-    <h1>인덱스 페이지</h1>
+<html lang="ko">
 
-    <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+<head xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS시스템</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mainPage.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header-container">
+        <div class="header">
+            <h2><a href="/">LMS시스템</a></h2>
+        </div>
+        <div th:replace="/fragments/header.html :: fragment-header-menu" class="menu"></div>
+
+    </div>
     <hr/>
+    <div class="menu">
+        <ul>
+            <li><a href="/course">강의</a></li>
+            <li><a href="/community">커뮤니티</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <h1>LMS시스템 메인페이지</h1>
+        <p>본 시스템은 토이 프로젝트 LMS시스템입니다.</p>
+        <button class="btn btn-primary">시작하기</button>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>

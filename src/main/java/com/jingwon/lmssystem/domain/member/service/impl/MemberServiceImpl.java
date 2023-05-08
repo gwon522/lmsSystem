@@ -10,6 +10,9 @@ import com.jingwon.lmssystem.domain.member.model.MemberInput;
 import com.jingwon.lmssystem.domain.member.model.ResetPwd;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -131,20 +134,21 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+
     @Override
-    public List<Member> list(SearchDto searchDto) {
+    public Page<Member> list(SearchDto searchDto, Pageable pageable) {
         log.info(searchDto.getSearchType() );
         if(searchDto.getSearchType() == null){
-            return memberRepository.findAll();
+            return memberRepository.findAll(pageable);
         }
         String searchValue =searchDto.getSearchValue();
         switch (searchDto.getSearchType()){
             case "phone":
-                return memberRepository.findByPhoneContaining(searchValue);
+                return memberRepository.findByPhoneContaining(searchValue,pageable);
             case "name":
-                return memberRepository.findByUserNameContaining(searchValue);
+                return memberRepository.findByUserNameContaining(searchValue,pageable);
             default:
-                return memberRepository.searchByUserNameOrPhone(searchValue);
+                return memberRepository.searchByUserNameOrPhone(searchValue,pageable);
         }
     }
 
@@ -161,6 +165,6 @@ public class MemberServiceImpl implements MemberService {
             role = "ADMIN";
         }
 
-        return User.builder().username(member.getUserId()).password(member.getPwd()).roles(role).build();
+        return User.builder().username(member.getUserName()).password(member.getPwd()).roles(role).build();
     }
 }

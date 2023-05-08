@@ -1,0 +1,12 @@
+a,a:hover {
+    text-decoration: none;
+}
+.list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.list table th, .list table td {
+    border:solid 1px #000;
+    text-align: center;
+}

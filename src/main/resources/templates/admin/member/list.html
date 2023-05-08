@@ -3,17 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자페이지</title>
-    <style>
-        .list table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .list table th, .list table td {
-            border:solid 1px #000;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/pagination.css">
+    <link rel="stylesheet" href="/css/adminList.css">
 </head>
 <body>
     <h1>회원관리</h1>
@@ -62,6 +53,21 @@
                 </tr>
             </tbody>
         </table>
+        <div th:if="${list.totalPages > 0}">
+            <ul class="pagination">
+                <li th:if="${list.hasPrevious()}" class="page-item">
+                    <a class="page-link" th:href="@{/admin/member/list(page=${list.number-1},size=${list.size})}">&lt;</a>
+                </li>
+                <li th:each="pageNumber : ${#numbers.sequence(0, list.totalPages-1)}"
+                    th:class="${pageNumber == list.number ? 'page-item active' : 'page-item'}">
+                    <a class="page-link" th:href="@{/admin/member/list(page=${pageNumber},size=${list.size})}"
+                       th:text="${pageNumber + 1}"></a>
+                </li>
+                <li th:if="${list.hasNext()}" class="page-item">
+                    <a class="page-link" th:href="@{/admin/member/list(page=${list.number+1},size=${list.size})}">&gt;</a>
+                </li>
+            </ul>
+        </div>
     </div>
 
 </body>
